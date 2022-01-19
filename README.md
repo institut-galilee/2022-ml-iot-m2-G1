@@ -1,5 +1,7 @@
 # 2021-ExamMonitoringSystem
 
+## Lien du Trello Mwen Wè Ou :
+https://trello.com/c/jmV9LduT/1-rpc
 <p align="center">
     <img src="doc/img/ExamMonitoringSystem_minimal_configuration.png" width="700px" alt="ExamMonitoringSystem_minimal_configuration">
 </p>
