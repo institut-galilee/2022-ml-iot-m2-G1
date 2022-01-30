@@ -1,7 +1,7 @@
 import numpy as np
 import cv2
 import platform
-import itertools
+import pickle
 #C:\Users\Louise\anaconda3\lib\site-packages\cv2\
 #https://www.delftstack.com/fr/howto/python/python-detect-os/
 
@@ -15,7 +15,16 @@ else:
     face_cascade = cv2.CascadeClassifier('src/cascades/data/haarcascade_frontalface_alt2.xml')
     eye_cascade = cv2.CascadeClassifier('src/cascades/data/haarcascade_eye.xml')
 
+labels = {}
+with open("labels.pickle", 'rb') as f:
+    tmp_labels = pickle.load(f)
+    labels = {v:k for k,v in tmp_labels.items()}
+
 cap = cv2.VideoCapture(0)
+recognizer = cv2.face.LBPHFaceRecognizer_create()
+recognizer.read("trainer.yml")
+
+
 
 while(True):
     #Capture video 
@@ -29,6 +38,10 @@ while(True):
         roi_gray = gray[y:y+h, x:x+w]
 
         #cv2.putText(frame, "person",(x,y), font, 1, (255,0,0), 2, cv2.LINE_AA)
+        id_, conf = recognizer.predict(roi_gray)
+
+        if conf>= 45 :#and conf <=85:
+            cv2.putText(frame, labels[id_], (x,y), font,1, (255,255,255), 2, cv2.LINE_AA)
         img_item = "my_image.png"
         cv2.imwrite(img_item, roi_gray)
 
@@ -37,9 +50,6 @@ while(True):
         coo_fin_x = x + w
         coo_fin_y = y + h 
         cv2.rectangle(frame, (x,y), (coo_fin_x, coo_fin_y), color, stroke)
-        eye = eye_cascade.detectMultiScale(gray,1.5,5)
-        for(ex,ey,ew,eh) in eye:
-            cv2.rectangle(frame, (ex,ey), (ex+ew, ey+eh), (0,0,255), stroke)
 
     #affichage
     cv2.imshow('frame', frame)
