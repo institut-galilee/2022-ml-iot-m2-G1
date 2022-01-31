@@ -1,7 +1,7 @@
 syntax = "proto3";
 
-package com.roboticsmind.exammonitoringsystem;
-option java_package = "com.roboticsmind.exammonitoringsystem.protobuf.lite";
+package com.example.mwenweou;
+option java_package = "com.example.mwenweou.protobuf.lite";
 option java_multiple_files = true;
 // optimize_for = LITE_RUNTIME is deprecated and thus not used here
 // (https://github.com/protocolbuffers/protobuf/blob/v3.9.0/java/lite.md)
