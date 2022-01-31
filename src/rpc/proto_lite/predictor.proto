@@ -8,30 +8,22 @@ option java_multiple_files = true;
 
 // messages
 
-enum ContentType {
-    Image = 0;
-    Script = 1;
-    SubDocument = 2;
+message  PredictionRequest{
+  string name = 1;
+  string situation = 2;
 }
 
-message PredictionRequest {
-    string url = 1;
-    repeated ContentType contentTypes = 2;
-    repeated string documentUrls = 3;
-    string sitekey = 4;
-    bool specificOnly = 5;
-}
-
-message BlockingFilter {
-    uint64 pointer = 1;
-}
 
 message PredictionResponse {
-    BlockingFilter filter = 1;
+  float64 sides = 1;
+  float64 updown = 2;
+  float64 aboveunder = 3;
+  
 }
+
 
 // services
 
 service PredictorService {
-    rpc predict(PredictionRequest) returns (PredictionResponse) {};
+    rpc predict(PredictionRequest) returns (stream PredictionResponse) {};
 }
