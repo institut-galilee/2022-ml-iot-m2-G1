@@ -2,7 +2,7 @@ import numpy as np
 import cv2
 import platform
 import pickle
-#C:\Users\Louise\anaconda3\lib\site-packages\cv2\
+# https://penseeartificielle.fr/tp-reconnaissance-faciale/
 #https://www.delftstack.com/fr/howto/python/python-detect-os/
 
 #Attention aux chemin ! Windows path =/= Linux path
@@ -24,7 +24,7 @@ cap = cv2.VideoCapture(0)
 recognizer = cv2.face.LBPHFaceRecognizer_create()
 recognizer.read("trainer.yml")
 
-
+filename = 'video.avi'
 
 while(True):
     #Capture video 
