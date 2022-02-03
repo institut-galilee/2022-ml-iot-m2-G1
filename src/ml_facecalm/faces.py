@@ -2,6 +2,7 @@ import numpy as np
 import cv2
 import platform
 import pickle
+import os
 # https://penseeartificielle.fr/tp-reconnaissance-faciale/
 #https://www.delftstack.com/fr/howto/python/python-detect-os/
 
@@ -25,6 +26,44 @@ recognizer = cv2.face.LBPHFaceRecognizer_create()
 recognizer.read("trainer.yml")
 
 filename = 'video.avi'
+fps = 24.0
+myres = '720p' #eh vu la qualité de ma webcam
+
+def change_res(cap, width, height):
+    cap.set(3, width)
+    cap.set(4, height)
+
+STD_DIM = {
+    "480p": (640,480),
+    "720p": (1280,720),
+    "1080p": (1920,1080),
+    "4k": (3840,2160),
+}
+
+VIDEO_TYPE = {
+    'avi': cv2.VideoWriter_fourcc(*'XVID'),
+    'mp4': cv2.VideoWriter_fourcc(*'XVID'),
+}
+
+def getVidType(filename):
+    filename, ext = os.path.splitext(filename)
+    if ext in VIDEO_TYPE:
+        return VIDEO_TYPE[ext]
+    return VIDEO_TYPE['avi']
+
+
+def getDim(cap, res='480p'):
+    width,height = STD_DIM['480p']
+    if res in STD_DIM:
+        width,height = STD_DIM[res]
+    change_res(cap, width,height)
+    return width,height
+
+
+video_type_cv2 = getVidType(filename)
+dims = getDim(cap, res=myres)
+#out = cv2.VideoWriter(filename, video_type_cv2, fps, dims)
+
 
 while(True):
     #Capture video 
@@ -58,5 +97,6 @@ while(True):
 
 #free
 cap.release()
+#out.release()
 cv2.destroyAllWindows()
 
