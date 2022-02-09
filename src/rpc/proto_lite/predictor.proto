@@ -8,22 +8,21 @@ option java_multiple_files = true;
 
 // messages
 
-message  PredictionRequest{
-  string name = 1;
-  string situation = 2;
+message AccRequest {
+  int32 sides = 2;
+  int32 updown = 3;
+  int32 aboveunder = 4;
 }
 
-
-message PredictionResponse {
-  float64 sides = 1;
-  float64 updown = 2;
-  float64 aboveunder = 3;
-  
+message AccResponse {
+  int32 sides = 2;
+  int32 updown = 3;
+  int32 aboveunder = 4;
 }
 
 
 // services
 
 service PredictorService {
-    rpc predict(PredictionRequest) returns (stream PredictionResponse) {};
+    rpc predict(AccRequest) returns (AccResponse) {};
 }
