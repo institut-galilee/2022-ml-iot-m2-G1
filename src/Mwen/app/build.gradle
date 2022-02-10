@@ -32,22 +32,6 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    
-    // configuration for protobuf-lite
-    sourceSets {
-        main {
-            // for IDE to find them
-            java {
-                srcDirs 'build/generated/source/proto/debug/java'
-                srcDirs 'build/generated/source/proto/debug/grpc'
-            }
-
-            proto {
-                // srcDir 'src/main/proto_lite'
-                srcDir '../../rpc/proto_lite'
-            }
-        }
-    }
 }
 
 dependencies {
@@ -80,8 +64,12 @@ protobuf {
         grpc { artifact = 'io.grpc:protoc-gen-grpc-java:1.25.0' // CURRENT_GRPC_VERSION
         }
     }
+
     generateProtoTasks {
         all().each { task ->
+            task.builtins{
+                remove java
+            }
             task.plugins {
                 javalite {}
                 grpc { // Options added to --grpc_out

@@ -1,28 +1,30 @@
 syntax = "proto3";
 
-package com.example.mwenweou;
-option java_package = "com.example.mwenweou.protobuf.lite";
+option java_package = "com.example.mwenweou";
 option java_multiple_files = true;
+option objc_class_prefix = 'AC' ;
+package predictor;
+
 // optimize_for = LITE_RUNTIME is deprecated and thus not used here
 // (https://github.com/protocolbuffers/protobuf/blob/v3.9.0/java/lite.md)
 
 // messages
 
 message AccRequest {
-  int32 sides = 2;
-  int32 updown = 3;
-  int32 aboveunder = 4;
+  float sides = 1;
+  float updown = 2;
+  float aboveunder = 3;
 }
 
 message AccResponse {
-  int32 sides = 2;
-  int32 updown = 3;
-  int32 aboveunder = 4;
+  float sides = 1;
+  float updown = 2;
+  float aboveunder = 3;
 }
 
 
 // services
 
 service PredictorService {
-    rpc predict(AccRequest) returns (AccResponse) {};
+  rpc predict(AccRequest) returns (AccResponse) {};
 }
