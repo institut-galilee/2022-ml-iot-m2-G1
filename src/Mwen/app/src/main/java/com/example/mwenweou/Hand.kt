@@ -10,9 +10,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
+import io.grpc.ManagedChannel
+import io.grpc.ManagedChannelBuilder
 
 class Hand : AppCompatActivity(), SensorEventListener {
-
+    private lateinit var channel : ManagedChannel
     private lateinit var sensorManager: SensorManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,6 +45,14 @@ class Hand : AppCompatActivity(), SensorEventListener {
             Log.e("SIDES", sides.toString())
             Log.e("UPDOWN", upDown.toString())
             Log.e("ABOVEUNDER", aboveunder.toString())
+
+            channel = ManagedChannelBuilder.forAddress("10.100.26.12", 50051)
+                .usePlaintext()
+                .build()
+            val stub : PredictorServiceGrpc.PredictorServiceBlockingStub = PredictorServiceGrpc.newBlockingStub(channel)
+
+            val request : AccRequest = AccRequest.newBuilder().setSides( 5.8f ).setUpdown( 5.8f ).setAboveunder( 5.8f ).build()
+            val reply : AccResponse = stub.predict(request)
         }
     }
 
