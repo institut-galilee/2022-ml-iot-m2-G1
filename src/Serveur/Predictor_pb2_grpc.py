@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import predictor_pb2 as predictor__pb2
+import Predictor_pb2 as Predictor__pb2
 
 
 class PredictorServiceStub(object):
@@ -17,9 +17,9 @@ class PredictorServiceStub(object):
             channel: A grpc.Channel.
         """
         self.predict = channel.unary_unary(
-                '/PredictorService/predict',
-                request_serializer=predictor__pb2.AccRequest.SerializeToString,
-                response_deserializer=predictor__pb2.AccResponse.FromString,
+                '/predictor.PredictorService/predict',
+                request_serializer=Predictor__pb2.AccRequest.SerializeToString,
+                response_deserializer=Predictor__pb2.AccResponse.FromString,
                 )
 
 
@@ -39,12 +39,12 @@ def add_PredictorServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'predict': grpc.unary_unary_rpc_method_handler(
                     servicer.predict,
-                    request_deserializer=predictor__pb2.AccRequest.FromString,
-                    response_serializer=predictor__pb2.AccResponse.SerializeToString,
+                    request_deserializer=Predictor__pb2.AccRequest.FromString,
+                    response_serializer=Predictor__pb2.AccResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'PredictorService', rpc_method_handlers)
+            'predictor.PredictorService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
@@ -65,8 +65,8 @@ class PredictorService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/PredictorService/predict',
-            predictor__pb2.AccRequest.SerializeToString,
-            predictor__pb2.AccResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/predictor.PredictorService/predict',
+            Predictor__pb2.AccRequest.SerializeToString,
+            Predictor__pb2.AccResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

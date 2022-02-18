@@ -1,8 +1,5 @@
 syntax = "proto3";
 
-option java_package = "com.example.mwenweou";
-option java_multiple_files = true;
-option objc_class_prefix = 'AC' ;
 package predictor;
 
 // optimize_for = LITE_RUNTIME is deprecated and thus not used here

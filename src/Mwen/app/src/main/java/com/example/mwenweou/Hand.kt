@@ -42,17 +42,16 @@ class Hand : AppCompatActivity(), SensorEventListener {
             val sides = event.values[0]
             val upDown = event.values[1]
             val aboveunder = event.values[2]
-            Log.e("SIDES", sides.toString())
-            Log.e("UPDOWN", upDown.toString())
-            Log.e("ABOVEUNDER", aboveunder.toString())
-
-            channel = ManagedChannelBuilder.forAddress("10.100.26.12", 50051)
+            channel = ManagedChannelBuilder.forAddress("192.168.1.52", 9333)
                 .usePlaintext()
                 .build()
             val stub : PredictorServiceGrpc.PredictorServiceBlockingStub = PredictorServiceGrpc.newBlockingStub(channel)
 
-            val request : AccRequest = AccRequest.newBuilder().setSides( 5.8f ).setUpdown( 5.8f ).setAboveunder( 5.8f ).build()
+
+            val request : AccRequest = AccRequest.newBuilder().setSides( sides ).setUpdown( upDown ).setAboveunder( aboveunder ).build()
             val reply : AccResponse = stub.predict(request)
+
+            channel.shutdown()
         }
     }
 
