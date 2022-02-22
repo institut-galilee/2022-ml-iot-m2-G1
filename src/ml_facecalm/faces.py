@@ -3,6 +3,7 @@ import cv2
 import platform
 import pickle
 import os
+import time
 # https://penseeartificielle.fr/tp-reconnaissance-faciale/
 #https://www.delftstack.com/fr/howto/python/python-detect-os/
 
@@ -25,9 +26,9 @@ cap = cv2.VideoCapture(0)
 recognizer = cv2.face.LBPHFaceRecognizer_create()
 recognizer.read("trainer.yml")
 
-filename = 'video.avi'
+filename = 'video1.avi'
 fps = 24.0
-myres = '720p' #eh vu la qualité de ma webcam
+myres = '480p' #eh vu la qualité de ma webcam
 
 def change_res(cap, width, height):
     cap.set(3, width)
@@ -62,7 +63,7 @@ def getDim(cap, res='480p'):
 
 video_type_cv2 = getVidType(filename)
 dims = getDim(cap, res=myres)
-#out = cv2.VideoWriter(filename, video_type_cv2, fps, dims)
+out = cv2.VideoWriter(filename, video_type_cv2, fps, dims)
 
 
 while(True):
@@ -72,9 +73,14 @@ while(True):
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     font = cv2.FONT_HERSHEY_SIMPLEX
     faces = face_cascade.detectMultiScale(gray, 1.5, 5)
+    
     for (x,y,w,h) in faces:
         #De y à y + la hauteur, et de X a x + la largeur
         roi_gray = gray[y:y+h, x:x+w]
+        if(len(faces)>=2):
+            out.write(frame)
+            print("triche ? " + str(len(faces)))
+            
 
         #cv2.putText(frame, "person",(x,y), font, 1, (255,0,0), 2, cv2.LINE_AA)
         id_, conf = recognizer.predict(roi_gray)
@@ -96,7 +102,8 @@ while(True):
         break
 
 #free
+
 cap.release()
-#out.release()
+out.release()
 cv2.destroyAllWindows()
 
