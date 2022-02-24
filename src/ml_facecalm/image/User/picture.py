@@ -1,3 +1,4 @@
+# @author Louise DAUDIN
 import os
 import cv2
 import time

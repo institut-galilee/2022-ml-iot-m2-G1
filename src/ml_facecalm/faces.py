@@ -1,10 +1,11 @@
+# @author Louise DAUDIN
 import numpy as np
 import cv2
 import platform
 import pickle
 import os
 import time
-# https://penseeartificielle.fr/tp-reconnaissance-faciale/
+#https://penseeartificielle.fr/tp-reconnaissance-faciale/
 #https://www.delftstack.com/fr/howto/python/python-detect-os/
 
 #Attention aux chemin ! Windows path =/= Linux path

@@ -42,7 +42,7 @@ class Hand : AppCompatActivity(), SensorEventListener {
             val sides = event.values[0]
             val upDown = event.values[1]
             val aboveunder = event.values[2]
-            channel = ManagedChannelBuilder.forAddress("192.168.1.52", 9333)
+            channel = ManagedChannelBuilder.forAddress("10.100.25.215", 9333)
                 .usePlaintext()
                 .build()
             val stub : PredictorServiceGrpc.PredictorServiceBlockingStub = PredictorServiceGrpc.newBlockingStub(channel)

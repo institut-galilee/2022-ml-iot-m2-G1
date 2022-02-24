@@ -1,3 +1,4 @@
+# @author Louise DAUDIN
 import os
 import platform
 from PIL import Image
