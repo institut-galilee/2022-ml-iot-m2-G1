@@ -5,6 +5,8 @@ import platform
 import pickle
 import os
 import time
+from datetime import datetime
+
 #https://penseeartificielle.fr/tp-reconnaissance-faciale/
 #https://www.delftstack.com/fr/howto/python/python-detect-os/
 
@@ -27,8 +29,7 @@ cap = cv2.VideoCapture(0)
 recognizer = cv2.face.LBPHFaceRecognizer_create()
 recognizer.read("trainer.yml")
 
-filename = 'video1.avi'
-fps = 24.0
+fps = 10.0
 myres = '480p' #eh vu la qualité de ma webcam
 
 def change_res(cap, width, height):
@@ -61,10 +62,11 @@ def getDim(cap, res='480p'):
     change_res(cap, width,height)
     return width,height
 
-
+now = datetime.now() # current date and time
+filename = now.strftime("%m_%d_%Y_%H%M") + ".avi"
 video_type_cv2 = getVidType(filename)
 dims = getDim(cap, res=myres)
-out = cv2.VideoWriter(filename, video_type_cv2, fps, dims)
+out = cv2.VideoWriter(filename, video_type_cv2, 30, dims)
 
 
 while(True):
