@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package predictor;
+
+// optimize_for = LITE_RUNTIME is deprecated and thus not used here
+// (https://github.com/protocolbuffers/protobuf/blob/v3.9.0/java/lite.md)
+
+// messages
+
+message AccRequest {
+  float sides = 1;
+  float updown = 2;
+  float aboveunder = 3;
+  string image = 4;
+  string user = 5;
+}
+
+message AccResponse {
+  float sides = 1;
+  float updown = 2;
+  float aboveunder = 3;
+  string image = 4;
+  string user = 5;
+}
+
+
+// services
+
+service PredictorService {
+  rpc predict(AccRequest) returns (AccResponse) {};
+}
