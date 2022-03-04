@@ -9,4 +9,5 @@ PyGObject==3.42.0
 python-Levenshtein==0.12.2
 six==1.16.0
 watchdog==2.1.6
-
+opencv-python
+lib_platform
