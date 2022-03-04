@@ -1,3 +1,10 @@
+/*
+https://www.youtube.com/watch?v=xcsuDDQHrLo
+https://stackoverflow.com/questions/9224056/android-bitmap-to-base64-string
+https://www.androidbugfix.com/2022/01/android-camerax-image-capture.html
+https://www.youtube.com/watch?v=HjXJh_vHXFs&t=1141s
+ */
+
 package com.example.mwenweou
 
 import android.content.Context
