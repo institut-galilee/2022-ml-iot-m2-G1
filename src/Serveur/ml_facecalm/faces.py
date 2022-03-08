@@ -1,3 +1,6 @@
+# https://www.youtube.com/watch?v=PmZ29Vta7Vc
+# https://www.delftstack.com/fr/howto/python/python-detect-os/
+# https://www.codingforentrepreneurs.com/blog/how-to-record-video-in-opencv-python/
 # @author Louise DAUDIN
 import cv2
 import platform
@@ -8,8 +11,8 @@ from datetime import datetime
 import ml_facecalm.face_train
 import ml_facecalm.userphoto
 
-#https://penseeartificielle.fr/tp-reconnaissance-faciale/
-#https://www.delftstack.com/fr/howto/python/python-detect-os/
+
+
 
 #Attention aux chemin ! Windows path =/= Linux path
 my_os = platform.system()

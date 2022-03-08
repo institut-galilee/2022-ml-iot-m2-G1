@@ -1,3 +1,4 @@
+# https://www.codingforentrepreneurs.com/blog/how-to-record-video-in-opencv-python/
 # @author Louise DAUDIN
 import cv2
 import time
